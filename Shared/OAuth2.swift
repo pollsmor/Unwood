@@ -9,20 +9,6 @@ let VALIDATE_URI = "https://id.twitch.tv/oauth2/validate"
 let REDIRECT_URI = "com.pollsmor.unwood://"
 let SCOPE = "user:read:email"
 
-/*
-func getSecret() -> String { // not useful for implicit flow, but leaving it in
-    var secret = ""
-    
-    let url = Bundle.main.url(forResource: "secret", withExtension: "txt")!
-    if let contents = try? String(contentsOf: url, encoding: .utf8) {
-        secret = contents
-    }
-
-    secret.removeLast() // for some reason there's a space at the end
-    return secret
-}
-*/
-
 func getAccessToken() -> String {
     let defaults = UserDefaults.standard
     if let token = defaults.value(forKey: "accessToken") as? String {
@@ -59,9 +45,6 @@ class TwitchAPI {
             viewController: UIApplication.shared.windows[0].rootViewController!,
             oauthSwift: oauthswift
         )
-        
-        signIn() // would put this in UnwoodApp.swift with .onAppear() but that leads to an infinite loop of bringing
-                 // up and down the embedded browser, this ensures this only gets called once
     }
     
     func signIn() {

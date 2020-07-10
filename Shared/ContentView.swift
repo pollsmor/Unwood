@@ -17,7 +17,7 @@ struct ContentView: View {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
-            }
+            }.onAppear(perform: twitchapi.signIn)
         }
     }
 }

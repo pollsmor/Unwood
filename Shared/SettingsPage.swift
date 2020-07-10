@@ -2,7 +2,13 @@ import SwiftUI
 
 struct SettingsPage: View {
     var body: some View {
-        Text("Settings").padding()
+        NavigationView {
+            List {
+                Text("1")
+                Text("2")
+                Text("3")
+            }.navigationBarTitle("Settings")
+        }
     }
 }
 
