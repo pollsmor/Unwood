@@ -37,7 +37,7 @@ func setAccessToken(token: String) {
     defaults.set(token, forKey: "accessToken")
 }
 
-func randomString(length: Int) -> String {
+func randomString(length: Int) -> String { // for generating random state parameter
   let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
   return String((0..<length).map{ _ in letters.randomElement()! })
 }
@@ -51,16 +51,17 @@ class TwitchAPI {
             consumerSecret: "",
             authorizeUrl: AUTH_URI,
             accessTokenUrl: TOKEN_URI,
-            responseType: "token"
+            responseType: "token" // implicit flow --> "code" = authorization flow
         )
         
-        //oauthswift.allowMissingStateCheck = true
+        // oauthswift.allowMissingStateCheck = true
         oauthswift.authorizeURLHandler = SafariURLHandler(
             viewController: UIApplication.shared.windows[0].rootViewController!,
             oauthSwift: oauthswift
         )
         
-        signIn()
+        signIn() // would put this in UnwoodApp.swift with .onAppear() but that leads to an infinite loop of bringing
+                 // up and down the embedded browser, this ensures this only gets called once
     }
     
     func signIn() {
@@ -96,9 +97,10 @@ class TwitchAPI {
             switch result {
             case .success(let response):
                 print("Validation response: \(response.string!)")
-            case .failure(let error):
+            case .failure(let error): // access token no longer valid
                 print("Validation error: \(error)")
-                self.signIn()
+                setAccessToken(token: "No access token stored.") // triggers if statement in signIn()
+                self.signIn() // log in again with stored cookies to obtain another token (should be automatic)
             }
         }
     }
@@ -117,4 +119,3 @@ class TwitchAPI {
         }
     }
 }
-
