@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		550ED19E24B809C40077D421 /* secret.txt in Resources */ = {isa = PBXBuildFile; fileRef = 550ED19D24B809C40077D421 /* secret.txt */; };
-		550ED19F24B809C40077D421 /* secret.txt in Resources */ = {isa = PBXBuildFile; fileRef = 550ED19D24B809C40077D421 /* secret.txt */; };
 		558C771324B802F400381F75 /* UnwoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770024B802F300381F75 /* UnwoodApp.swift */; };
 		558C771424B802F400381F75 /* UnwoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770024B802F300381F75 /* UnwoodApp.swift */; };
 		558C771524B802F400381F75 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770124B802F300381F75 /* ContentView.swift */; };
@@ -21,7 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		550ED19D24B809C40077D421 /* secret.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secret.txt; sourceTree = "<group>"; };
 		558C770024B802F300381F75 /* UnwoodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnwoodApp.swift; sourceTree = "<group>"; };
 		558C770124B802F300381F75 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		558C770224B802F400381F75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -69,7 +66,6 @@
 				558C772724B803D400381F75 /* OAuth2.swift */,
 				558C770124B802F300381F75 /* ContentView.swift */,
 				558C770224B802F400381F75 /* Assets.xcassets */,
-				550ED19D24B809C40077D421 /* secret.txt */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -184,7 +180,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				550ED19E24B809C40077D421 /* secret.txt in Resources */,
 				558C771724B802F400381F75 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,7 +188,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				550ED19F24B809C40077D421 /* secret.txt in Resources */,
 				558C771824B802F400381F75 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

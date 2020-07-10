@@ -7,11 +7,8 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("Unwood for Twitch").padding()
-            Button(action: twitchapi.signIn) {
-                Text("Sign in")
-            }
-            Button(action: twitchapi.getUsers) {
-                Text("Get list of users")
+            Button(action: twitchapi.getPersonalData) {
+                Text("Get personal data")
             }
         }
     }
