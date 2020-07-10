@@ -1,15 +1,19 @@
-//
-//  ContentView.swift
-//  Shared
-//
-//  Created by Kevin Li on 7/9/20.
-//
-
 import SwiftUI
+
+// OAuth2 stuff
+let twitchapi = TwitchAPI()
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!").padding()
+        VStack {
+            Text("Unwood for Twitch").padding()
+            Button(action: twitchapi.signIn) {
+                Text("Sign in")
+            }
+            Button(action: twitchapi.getUsers) {
+                Text("Get list of users")
+            }
+        }
     }
 }
 

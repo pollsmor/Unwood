@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,11 @@
 		558C771624B802F400381F75 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770124B802F300381F75 /* ContentView.swift */; };
 		558C771724B802F400381F75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 558C770224B802F400381F75 /* Assets.xcassets */; };
 		558C771824B802F400381F75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 558C770224B802F400381F75 /* Assets.xcassets */; };
+		558C772324B8034600381F75 /* OAuthSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 558C772224B8034600381F75 /* OAuthSwift */; };
+		558C772524B803BB00381F75 /* secret.txt in Resources */ = {isa = PBXBuildFile; fileRef = 558C772424B803BB00381F75 /* secret.txt */; };
+		558C772624B803BB00381F75 /* secret.txt in Resources */ = {isa = PBXBuildFile; fileRef = 558C772424B803BB00381F75 /* secret.txt */; };
+		558C772824B803D400381F75 /* OAuth2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C772724B803D400381F75 /* OAuth2.swift */; };
+		558C772924B803D400381F75 /* OAuth2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C772724B803D400381F75 /* OAuth2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,8 @@
 		558C770F24B802F400381F75 /* Unwood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unwood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		558C771124B802F400381F75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		558C771224B802F400381F75 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		558C772424B803BB00381F75 /* secret.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = secret.txt; sourceTree = "<group>"; };
+		558C772724B803D400381F75 /* OAuth2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558C772324B8034600381F75 /* OAuthSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +66,8 @@
 			isa = PBXGroup;
 			children = (
 				558C770024B802F300381F75 /* UnwoodApp.swift */,
+				558C772724B803D400381F75 /* OAuth2.swift */,
+				558C772424B803BB00381F75 /* secret.txt */,
 				558C770124B802F300381F75 /* ContentView.swift */,
 				558C770224B802F400381F75 /* Assets.xcassets */,
 			);
@@ -106,6 +116,9 @@
 			dependencies = (
 			);
 			name = "Unwood (iOS)";
+			packageProductDependencies = (
+				558C772224B8034600381F75 /* OAuthSwift */,
+			);
 			productName = "Unwood (iOS)";
 			productReference = 558C770724B802F400381F75 /* Unwood.app */;
 			productType = "com.apple.product-type.application";
@@ -153,6 +166,9 @@
 				Base,
 			);
 			mainGroup = 558C76FA24B802F300381F75;
+			packageReferences = (
+				558C772124B8034600381F75 /* XCRemoteSwiftPackageReference "OAuthSwift" */,
+			);
 			productRefGroup = 558C770824B802F400381F75 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -168,6 +184,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558C772524B803BB00381F75 /* secret.txt in Resources */,
 				558C771724B802F400381F75 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +193,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558C772624B803BB00381F75 /* secret.txt in Resources */,
 				558C771824B802F400381F75 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558C772824B803D400381F75 /* OAuth2.swift in Sources */,
 				558C771524B802F400381F75 /* ContentView.swift in Sources */,
 				558C771324B802F400381F75 /* UnwoodApp.swift in Sources */,
 			);
@@ -196,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				558C772924B803D400381F75 /* OAuth2.swift in Sources */,
 				558C771624B802F400381F75 /* ContentView.swift in Sources */,
 				558C771424B802F400381F75 /* UnwoodApp.swift in Sources */,
 			);
@@ -439,6 +459,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		558C772124B8034600381F75 /* XCRemoteSwiftPackageReference "OAuthSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OAuthSwift/OAuthSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		558C772224B8034600381F75 /* OAuthSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 558C772124B8034600381F75 /* XCRemoteSwiftPackageReference "OAuthSwift" */;
+			productName = OAuthSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 558C76FB24B802F300381F75 /* Project object */;
 }
