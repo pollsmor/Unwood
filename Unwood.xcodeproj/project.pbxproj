@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		550ED1A124B8FA2F0077D421 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550ED1A024B8FA2F0077D421 /* SettingsPage.swift */; };
+		550ED1A224B8FA2F0077D421 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550ED1A024B8FA2F0077D421 /* SettingsPage.swift */; };
+		550ED1A424B8FAF50077D421 /* FollowingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550ED1A324B8FAF50077D421 /* FollowingPage.swift */; };
+		550ED1A524B8FAF50077D421 /* FollowingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550ED1A324B8FAF50077D421 /* FollowingPage.swift */; };
+		550ED1A724B8FD220077D421 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550ED1A624B8FD220077D421 /* LoginPage.swift */; };
+		550ED1A824B8FD220077D421 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550ED1A624B8FD220077D421 /* LoginPage.swift */; };
 		558C771324B802F400381F75 /* UnwoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770024B802F300381F75 /* UnwoodApp.swift */; };
 		558C771424B802F400381F75 /* UnwoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770024B802F300381F75 /* UnwoodApp.swift */; };
 		558C771524B802F400381F75 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770124B802F300381F75 /* ContentView.swift */; };
@@ -19,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		550ED1A024B8FA2F0077D421 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
+		550ED1A324B8FAF50077D421 /* FollowingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingPage.swift; sourceTree = "<group>"; };
+		550ED1A624B8FD220077D421 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		558C770024B802F300381F75 /* UnwoodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnwoodApp.swift; sourceTree = "<group>"; };
 		558C770124B802F300381F75 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		558C770224B802F400381F75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,6 +75,9 @@
 				558C772724B803D400381F75 /* OAuth2.swift */,
 				558C770124B802F300381F75 /* ContentView.swift */,
 				558C770224B802F400381F75 /* Assets.xcassets */,
+				550ED1A024B8FA2F0077D421 /* SettingsPage.swift */,
+				550ED1A324B8FAF50077D421 /* FollowingPage.swift */,
+				550ED1A624B8FD220077D421 /* LoginPage.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -202,6 +214,9 @@
 				558C772824B803D400381F75 /* OAuth2.swift in Sources */,
 				558C771524B802F400381F75 /* ContentView.swift in Sources */,
 				558C771324B802F400381F75 /* UnwoodApp.swift in Sources */,
+				550ED1A424B8FAF50077D421 /* FollowingPage.swift in Sources */,
+				550ED1A724B8FD220077D421 /* LoginPage.swift in Sources */,
+				550ED1A124B8FA2F0077D421 /* SettingsPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +227,9 @@
 				558C772924B803D400381F75 /* OAuth2.swift in Sources */,
 				558C771624B802F400381F75 /* ContentView.swift in Sources */,
 				558C771424B802F400381F75 /* UnwoodApp.swift in Sources */,
+				550ED1A524B8FAF50077D421 /* FollowingPage.swift in Sources */,
+				550ED1A824B8FD220077D421 /* LoginPage.swift in Sources */,
+				550ED1A224B8FA2F0077D421 /* SettingsPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

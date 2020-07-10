@@ -5,10 +5,18 @@ let twitchapi = TwitchAPI()
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Text("Unwood for Twitch").padding()
-            Button(action: twitchapi.getPersonalData) {
-                Text("Get personal data")
+        if getAccessToken() == "No access token stored." {
+            LoginPage()
+        } else {
+            TabView {
+                FollowingPage().tabItem {
+                        Image(systemName: "heart.fill")
+                        Text("Following")
+                }
+                SettingsPage().tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")
+                }
             }
         }
     }
