@@ -5,10 +5,9 @@ import OAuthSwift
 struct UnwoodApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .onOpenURL { url in
-                    OAuthSwift.handle(url: url)
-                }
+            ContentView().onOpenURL { url in
+                OAuthSwift.handle(url: url)
+            }
         }
     }
 }

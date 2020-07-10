@@ -6,6 +6,7 @@ let CLIENT_ID = "cnhtxu8qinx7qizf5rl3q4geimqt2v"
 let CLIENT_SECRET: String = getSecret()
 let AUTH_URI = "https://id.twitch.tv/oauth2/authorize"
 let TOKEN_URI = "https://id.twitch.tv/oauth2/token"
+let VALIDATE_URI = "https://id.twitch.tv/oauth2/validate"
 let REDIRECT_URI = "com.pollsmor.unwood://"
 let SCOPE = "user:read:email"
 
@@ -46,23 +47,35 @@ class TwitchAPI {
             scope: SCOPE, state: "") { result in
             switch result {
             case .success(let (credential, response, _)):
-                print("Token: \(credential.oauthToken)")
-                print("Response: \(response!.string!)")
+                print("Auth token: \(credential.oauthToken)")
+                print("Auth response: \(response!.string!)")
             case .failure(let error):
-                print("Error: \(error.description)")
-                print("Description: \(error.localizedDescription)")
+                print("Auth error: \(error.description)")
+            }
+        }
+    }
+    
+    func validate() { // required to do this periodically as per Twitch API docs
+        oauthswift.client.request(VALIDATE_URI, method: .GET) { result in
+            switch result {
+            case .success(let response):
+                print("Validation response: \(response.string!)")
+            case .failure(let error):
+                print("Validation error: \(error)")
             }
         }
     }
     
     func getUsers() {
+        validate()
+        
         oauthswift.client.request(BASE_URL + "/users", method: .GET, headers: ["Client-ID": CLIENT_ID]) { result in
             switch result {
             case .success(let response):
-                print("Users Response: \(response.response)")
-                print("String: \(response.string!)")
+                //print("Users Response: \(response.response)")
+                print("Users response: \(response.string!)")
             case .failure(let error):
-                print("Users Error: \(error)")
+                print("Users error: \(error)")
             }
         }
     }
