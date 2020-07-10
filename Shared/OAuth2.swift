@@ -37,6 +37,11 @@ func setAccessToken(token: String) {
     defaults.set(token, forKey: "accessToken")
 }
 
+func randomString(length: Int) -> String {
+  let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  return String((0..<length).map{ _ in letters.randomElement()! })
+}
+
 class TwitchAPI {
     let oauthswift: OAuth2Swift
     
@@ -49,7 +54,7 @@ class TwitchAPI {
             responseType: "token"
         )
         
-        oauthswift.allowMissingStateCheck = true
+        //oauthswift.allowMissingStateCheck = true
         oauthswift.authorizeURLHandler = SafariURLHandler(
             viewController: UIApplication.shared.windows[0].rootViewController!,
             oauthSwift: oauthswift
@@ -65,13 +70,20 @@ class TwitchAPI {
             oauthswift.client.credential.oauthToken = accessToken
         } else {
             print("Not signed in yet.")
+            let state = randomString(length: 30)
             oauthswift.authorize(
                 withCallbackURL: REDIRECT_URI,
-                scope: SCOPE, state: "") { result in
+                scope: SCOPE, state: state) { result in
                 switch result {
-                case .success(let (credential, _, _)):
+                case .success(let (credential, _, parameters)):
                     print("Token: \(credential.oauthToken)")
-                    setAccessToken(token: credential.oauthToken)
+                    print("Parameters: \(parameters)")
+                    if parameters["state"] as! String == state {
+                        print("[State] parameter validated, saving access token.")
+                        setAccessToken(token: credential.oauthToken)
+                    } else {
+                        print("[State] parameter does not match. Not logging in.")
+                    }
                 case .failure(let error):
                     print("Auth error: \(error.description)")
                 }
