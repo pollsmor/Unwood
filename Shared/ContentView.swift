@@ -1,11 +1,10 @@
 import SwiftUI
 
-// OAuth2 stuff
-let twitchapi = TwitchAPI()
-
 struct ContentView: View {
+    @EnvironmentObject var userData: User
+    
     var body: some View {
-        if getAccessToken() == "No access token stored." {
+        if !userData.isLoggedIn {
             LoginPage()
         } else {
             TabView {
@@ -17,7 +16,7 @@ struct ContentView: View {
                     Image(systemName: "gear")
                     Text("Settings")
                 }
-            }.onAppear(perform: twitchapi.signIn)
+            }
         }
     }
 }
@@ -26,5 +25,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(userData)
     }
 }

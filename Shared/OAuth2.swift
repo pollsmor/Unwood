@@ -9,24 +9,7 @@ let VALIDATE_URI = "https://id.twitch.tv/oauth2/validate"
 let REDIRECT_URI = "com.pollsmor.unwood://"
 let SCOPE = "user:read:email"
 
-func getAccessToken() -> String {
-    let defaults = UserDefaults.standard
-    if let token = defaults.value(forKey: "accessToken") as? String {
-        return token
-    }
-    
-    return "No access token stored."
-}
-
-func setAccessToken(token: String) {
-    let defaults = UserDefaults.standard
-    defaults.set(token, forKey: "accessToken")
-}
-
-func randomString(length: Int) -> String { // for generating random state parameter
-  let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-  return String((0..<length).map{ _ in letters.randomElement()! })
-}
+let twitchapi = TwitchAPI()
 
 class TwitchAPI {
     let oauthswift: OAuth2Swift
@@ -45,32 +28,41 @@ class TwitchAPI {
             viewController: UIApplication.shared.windows[0].rootViewController!,
             oauthSwift: oauthswift
         )
+        
+        if userData.isLoggedIn { // access token found, log in
+            oauthswift.client.credential.oauthToken = getAccessToken()
+        }
+        
+        checkIfSignedIn()
+    }
+    
+    func checkIfSignedIn() {
+        let accessToken = getAccessToken()
+        
+        if accessToken != "No access token stored." { // cause ContentView to render main page instead of login
+            oauthswift.client.credential.oauthToken = accessToken
+            userData.isLoggedIn = true
+        }
     }
     
     func signIn() {
-        let accessToken = getAccessToken()
-        if accessToken != "No access token stored." {
-            print("Already signed in! Access token: \(accessToken)")
-            oauthswift.client.credential.oauthToken = accessToken
-        } else {
-            print("Not signed in yet.")
-            let state = randomString(length: 30)
-            oauthswift.authorize(
-                withCallbackURL: REDIRECT_URI,
-                scope: SCOPE, state: state) { result in
-                switch result {
-                case .success(let (credential, _, parameters)):
-                    print("Token: \(credential.oauthToken)")
-                    print("Parameters: \(parameters)")
-                    if parameters["state"] as! String == state {
-                        print("[State] parameter validated, saving access token.")
-                        setAccessToken(token: credential.oauthToken)
-                    } else {
-                        print("[State] parameter does not match. Not logging in.")
-                    }
-                case .failure(let error):
-                    print("Auth error: \(error.description)")
+        let state = randomString(length: 30)
+        oauthswift.authorize(
+            withCallbackURL: REDIRECT_URI,
+            scope: SCOPE, state: state) { result in
+            switch result {
+            case .success(let (credential, _, parameters)):
+                print("Token: \(credential.oauthToken)")
+                print("Parameters: \(parameters)")
+                if parameters["state"] as! String == state {
+                    print("[State] parameter validated, saving access token.")
+                    storeAccessToken(token: credential.oauthToken)
+                    userData.isLoggedIn = true
+                } else {
+                    print("[State] parameter does not match. Not logging in.")
                 }
+            case .failure(let error):
+                print("Auth error: \(error.description)")
             }
         }
     }
@@ -82,7 +74,7 @@ class TwitchAPI {
                 print("Validation response: \(response.string!)")
             case .failure(let error): // access token no longer valid
                 print("Validation error: \(error)")
-                setAccessToken(token: "No access token stored.") // triggers if statement in signIn()
+                storeAccessToken(token: "No access token stored.")
                 self.signIn() // log in again with stored cookies to obtain another token (should be automatic)
             }
         }
@@ -101,4 +93,24 @@ class TwitchAPI {
             }
         }
     }
+}
+
+// Helper functions ===================================================
+func getAccessToken() -> String {
+    let defaults = UserDefaults.standard
+    if let token = defaults.value(forKey: "accessToken") as? String {
+        return token
+    }
+    
+    return "No access token stored."
+}
+
+func storeAccessToken(token: String) {
+    let defaults = UserDefaults.standard
+    defaults.set(token, forKey: "accessToken")
+}
+
+func randomString(length: Int) -> String { // for generating random state parameter
+  let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  return String((0..<length).map{ _ in letters.randomElement()! })
 }
