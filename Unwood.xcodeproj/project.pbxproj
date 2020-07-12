@@ -71,10 +71,10 @@
 		558C76FF24B802F300381F75 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				558C770224B802F400381F75 /* Assets.xcassets */,
 				558C770024B802F300381F75 /* UnwoodApp.swift */,
 				558C772724B803D400381F75 /* OAuth2.swift */,
 				558C770124B802F300381F75 /* ContentView.swift */,
-				558C770224B802F400381F75 /* Assets.xcassets */,
 				550ED1A024B8FA2F0077D421 /* SettingsPage.swift */,
 				550ED1A324B8FAF50077D421 /* FollowingPage.swift */,
 				550ED1A624B8FD220077D421 /* LoginPage.swift */,

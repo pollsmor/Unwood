@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var userData: User
+    @EnvironmentObject var currUser: CurrentUser
     
     var body: some View {
-        if !userData.isLoggedIn {
+        if !currUser.isLoggedIn {
             LoginPage()
         } else {
             TabView {
@@ -25,6 +25,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(userData)
+            .environmentObject(currUser)
     }
 }

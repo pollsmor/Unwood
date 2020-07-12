@@ -1,18 +1,18 @@
 import SwiftUI
 import OAuthSwift
 
-class User: ObservableObject {
+class CurrentUser: ObservableObject {
     @Published var isLoggedIn = false
 }
 
-var userData = User()
+var currUser = CurrentUser()
 
 @main
 struct UnwoodApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(userData)
+                .environmentObject(currUser)
                 .onOpenURL { url in
                     OAuthSwift.handle(url: url) // no longer doing this in SceneDelegate like on iOS 13
                 }

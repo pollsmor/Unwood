@@ -23,15 +23,10 @@ class TwitchAPI {
             responseType: "token" // implicit flow --> "code" = authorization flow
         )
         
-        // oauthswift.allowMissingStateCheck = true
         oauthswift.authorizeURLHandler = SafariURLHandler(
             viewController: UIApplication.shared.windows[0].rootViewController!,
             oauthSwift: oauthswift
         )
-        
-        if userData.isLoggedIn { // access token found, log in
-            oauthswift.client.credential.oauthToken = getAccessToken()
-        }
         
         checkIfSignedIn()
     }
@@ -41,7 +36,7 @@ class TwitchAPI {
         
         if accessToken != "No access token stored." { // cause ContentView to render main page instead of login
             oauthswift.client.credential.oauthToken = accessToken
-            userData.isLoggedIn = true
+            currUser.isLoggedIn = true
         }
     }
     
@@ -57,7 +52,7 @@ class TwitchAPI {
                 if parameters["state"] as! String == state {
                     print("[State] parameter validated, saving access token.")
                     storeAccessToken(token: credential.oauthToken)
-                    userData.isLoggedIn = true
+                    currUser.isLoggedIn = true
                 } else {
                     print("[State] parameter does not match. Not logging in.")
                 }
@@ -86,8 +81,17 @@ class TwitchAPI {
         oauthswift.client.request(BASE_URL + "/users", method: .GET, headers: ["Client-ID": CLIENT_ID]) { result in
             switch result {
             case .success(let response):
-                //print("Users Response: \(response.response)")
-                print("Users response: \(response.string!)")
+                let data = response.string!.data(using: .utf8)!
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                        let parsed = json["data"] as! [[String: Any]]
+                        print(parsed[0])
+                    } else {
+                        print("Bad JSON")
+                    }
+                } catch let error {
+                    print(error)
+                }
             case .failure(let error):
                 print("Users error: \(error)")
             }
