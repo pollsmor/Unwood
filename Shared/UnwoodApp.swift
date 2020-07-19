@@ -3,6 +3,7 @@ import OAuthSwift
 
 class CurrentUser: ObservableObject {
     @Published var isLoggedIn = false
+    @Published var userData = User()
 }
 
 var currUser = CurrentUser()
@@ -15,8 +16,6 @@ struct UnwoodApp: App {
                 .environmentObject(currUser)
                 .onOpenURL { url in
                     OAuthSwift.handle(url: url) // no longer doing this in SceneDelegate like on iOS 13
-                }
-                .onAppear() {
                 }
         }
     }

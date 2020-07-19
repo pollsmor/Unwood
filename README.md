@@ -8,3 +8,4 @@
 ## Required libraries ##
 Install using the Swift Package Manager.
 - [OAuthSwift](https://github.com/OAuthSwift/OAuthSwift)
+- [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)

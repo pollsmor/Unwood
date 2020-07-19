@@ -1,5 +1,6 @@
 import SwiftUI
 import OAuthSwift
+import SwiftyJSON
 
 let BASE_URL = "https://api.twitch.tv/helix"
 let CLIENT_ID = "cnhtxu8qinx7qizf5rl3q4geimqt2v"
@@ -62,17 +63,22 @@ class TwitchAPI {
         }
     }
     
-    func validate() { // required to do this periodically as per Twitch API docs
+    func validate() -> Bool { // required to do this periodically as per Twitch API docs
+        var successful = false
+        
         oauthswift.client.request(VALIDATE_URI, method: .GET) { result in
             switch result {
             case .success(let response):
                 print("Validation response: \(response.string!)")
+                successful = true
             case .failure(let error): // access token no longer valid
                 print("Validation error: \(error)")
                 storeAccessToken(token: "No access token stored.")
                 self.signIn() // log in again with stored cookies to obtain another token (should be automatic)
             }
         }
+        
+        return successful
     }
     
     func getPersonalData() {
@@ -81,16 +87,12 @@ class TwitchAPI {
         oauthswift.client.request(BASE_URL + "/users", method: .GET, headers: ["Client-ID": CLIENT_ID]) { result in
             switch result {
             case .success(let response):
-                let data = response.string!.data(using: .utf8)!
-                do {
-                    if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                        let parsed = json["data"] as! [[String: Any]]
-                        print(parsed[0])
-                    } else {
-                        print("Bad JSON")
-                    }
-                } catch let error {
-                    print(error)
+                //print(response.string!)
+                if let data = response.string!.data(using: .utf8) {
+                    let json = try! JSON(data: data)
+                    let parsed = json["data"][0]
+                    let name = parsed["display_name"]
+                    print(name)
                 }
             case .failure(let error):
                 print("Users error: \(error)")

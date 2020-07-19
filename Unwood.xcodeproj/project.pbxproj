@@ -13,6 +13,9 @@
 		550ED1A524B8FAF50077D421 /* FollowingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550ED1A324B8FAF50077D421 /* FollowingPage.swift */; };
 		550ED1A724B8FD220077D421 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550ED1A624B8FD220077D421 /* LoginPage.swift */; };
 		550ED1A824B8FD220077D421 /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550ED1A624B8FD220077D421 /* LoginPage.swift */; };
+		5560C9B524C2382F009744E5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5560C9B424C2382F009744E5 /* API.swift */; };
+		5560C9B624C2382F009744E5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5560C9B424C2382F009744E5 /* API.swift */; };
+		5560C9B924C4987E009744E5 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5560C9B824C4987E009744E5 /* SwiftyJSON */; };
 		558C771324B802F400381F75 /* UnwoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770024B802F300381F75 /* UnwoodApp.swift */; };
 		558C771424B802F400381F75 /* UnwoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770024B802F300381F75 /* UnwoodApp.swift */; };
 		558C771524B802F400381F75 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770124B802F300381F75 /* ContentView.swift */; };
@@ -28,6 +31,7 @@
 		550ED1A024B8FA2F0077D421 /* SettingsPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPage.swift; sourceTree = "<group>"; };
 		550ED1A324B8FAF50077D421 /* FollowingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingPage.swift; sourceTree = "<group>"; };
 		550ED1A624B8FD220077D421 /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
+		5560C9B424C2382F009744E5 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		558C770024B802F300381F75 /* UnwoodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnwoodApp.swift; sourceTree = "<group>"; };
 		558C770124B802F300381F75 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		558C770224B802F400381F75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -44,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5560C9B924C4987E009744E5 /* SwiftyJSON in Frameworks */,
 				558C772324B8034600381F75 /* OAuthSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +83,7 @@
 				550ED1A024B8FA2F0077D421 /* SettingsPage.swift */,
 				550ED1A324B8FAF50077D421 /* FollowingPage.swift */,
 				550ED1A624B8FD220077D421 /* LoginPage.swift */,
+				5560C9B424C2382F009744E5 /* API.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -126,6 +132,7 @@
 			name = "Unwood (iOS)";
 			packageProductDependencies = (
 				558C772224B8034600381F75 /* OAuthSwift */,
+				5560C9B824C4987E009744E5 /* SwiftyJSON */,
 			);
 			productName = "Unwood (iOS)";
 			productReference = 558C770724B802F400381F75 /* Unwood.app */;
@@ -176,6 +183,7 @@
 			mainGroup = 558C76FA24B802F300381F75;
 			packageReferences = (
 				558C772124B8034600381F75 /* XCRemoteSwiftPackageReference "OAuthSwift" */,
+				5560C9B724C4987D009744E5 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 558C770824B802F400381F75 /* Products */;
 			projectDirPath = "";
@@ -217,6 +225,7 @@
 				550ED1A424B8FAF50077D421 /* FollowingPage.swift in Sources */,
 				550ED1A724B8FD220077D421 /* LoginPage.swift in Sources */,
 				550ED1A124B8FA2F0077D421 /* SettingsPage.swift in Sources */,
+				5560C9B524C2382F009744E5 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +239,7 @@
 				550ED1A524B8FAF50077D421 /* FollowingPage.swift in Sources */,
 				550ED1A824B8FD220077D421 /* LoginPage.swift in Sources */,
 				550ED1A224B8FA2F0077D421 /* SettingsPage.swift in Sources */,
+				5560C9B624C2382F009744E5 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,6 +483,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5560C9B724C4987D009744E5 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		558C772124B8034600381F75 /* XCRemoteSwiftPackageReference "OAuthSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OAuthSwift/OAuthSwift.git";
@@ -484,6 +502,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5560C9B824C4987E009744E5 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5560C9B724C4987D009744E5 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
 		558C772224B8034600381F75 /* OAuthSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 558C772124B8034600381F75 /* XCRemoteSwiftPackageReference "OAuthSwift" */;

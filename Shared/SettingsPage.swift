@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SettingsPage: View {
+    @State private var userData = currUser.userData
+    
     var body: some View {
         NavigationView {
             List {
@@ -12,6 +14,10 @@ struct SettingsPage: View {
                 Text("3")
             }.navigationBarTitle("Settings")
         }
+    }
+    
+    func loadData() {
+        
     }
 }
 
