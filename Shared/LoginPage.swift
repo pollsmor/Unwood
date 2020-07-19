@@ -7,7 +7,7 @@ struct LoginPage: View {
                 Text("Unwood for Twitch")
                     .font(.largeTitle)
                     .padding()
-                Button(action: twitchapi.signIn) {
+                Button(action: signIn) {
                     Text("Sign in")
                         .font(.title)
                 }
