@@ -9,3 +9,4 @@
 Install using the Swift Package Manager.
 - [OAuthSwift](https://github.com/OAuthSwift/OAuthSwift)
 - [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)
+- [RemoteImage](https://github.com/crelies/RemoteImage)

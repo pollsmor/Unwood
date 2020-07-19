@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftyJSON
+import RemoteImage
 
 struct SettingsPage: View {
     @State private var userData = currUser.userData
@@ -7,7 +8,19 @@ struct SettingsPage: View {
     var body: some View {
         NavigationView {
             List {
-                Text(userData.name)
+                HStack {
+                    RemoteImage(type: .url(URL(string: userData.avatar_url)!), errorView: { error in
+                        Text(error.localizedDescription)
+                    }, imageView: { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 64.0)
+                    }, loadingView: {
+                        Text("Loading...")
+                    })
+                    Text(userData.name)
+                }
                 Text("1")
                 Text("2")
                 Text("3")

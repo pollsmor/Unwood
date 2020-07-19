@@ -16,6 +16,7 @@
 		5560C9B524C2382F009744E5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5560C9B424C2382F009744E5 /* API.swift */; };
 		5560C9B624C2382F009744E5 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5560C9B424C2382F009744E5 /* API.swift */; };
 		5560C9B924C4987E009744E5 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 5560C9B824C4987E009744E5 /* SwiftyJSON */; };
+		5560C9BC24C4E1F3009744E5 /* RemoteImage in Frameworks */ = {isa = PBXBuildFile; productRef = 5560C9BB24C4E1F3009744E5 /* RemoteImage */; };
 		558C771324B802F400381F75 /* UnwoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770024B802F300381F75 /* UnwoodApp.swift */; };
 		558C771424B802F400381F75 /* UnwoodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770024B802F300381F75 /* UnwoodApp.swift */; };
 		558C771524B802F400381F75 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558C770124B802F300381F75 /* ContentView.swift */; };
@@ -50,6 +51,7 @@
 			files = (
 				5560C9B924C4987E009744E5 /* SwiftyJSON in Frameworks */,
 				558C772324B8034600381F75 /* OAuthSwift in Frameworks */,
+				5560C9BC24C4E1F3009744E5 /* RemoteImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +135,7 @@
 			packageProductDependencies = (
 				558C772224B8034600381F75 /* OAuthSwift */,
 				5560C9B824C4987E009744E5 /* SwiftyJSON */,
+				5560C9BB24C4E1F3009744E5 /* RemoteImage */,
 			);
 			productName = "Unwood (iOS)";
 			productReference = 558C770724B802F400381F75 /* Unwood.app */;
@@ -184,6 +187,7 @@
 			packageReferences = (
 				558C772124B8034600381F75 /* XCRemoteSwiftPackageReference "OAuthSwift" */,
 				5560C9B724C4987D009744E5 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				5560C9BA24C4E1F3009744E5 /* XCRemoteSwiftPackageReference "RemoteImage" */,
 			);
 			productRefGroup = 558C770824B802F400381F75 /* Products */;
 			projectDirPath = "";
@@ -491,6 +495,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		5560C9BA24C4E1F3009744E5 /* XCRemoteSwiftPackageReference "RemoteImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/crelies/RemoteImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
 		558C772124B8034600381F75 /* XCRemoteSwiftPackageReference "OAuthSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OAuthSwift/OAuthSwift.git";
@@ -506,6 +518,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5560C9B724C4987D009744E5 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		5560C9BB24C4E1F3009744E5 /* RemoteImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5560C9BA24C4E1F3009744E5 /* XCRemoteSwiftPackageReference "RemoteImage" */;
+			productName = RemoteImage;
 		};
 		558C772224B8034600381F75 /* OAuthSwift */ = {
 			isa = XCSwiftPackageProductDependency;
