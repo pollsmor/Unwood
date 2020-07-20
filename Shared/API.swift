@@ -1,3 +1,5 @@
+import SwiftUI
+
 struct User {
     var id: String = ""
     var name: String = ""
@@ -8,7 +10,8 @@ struct User {
     var follows = [UserFollow()]
 }
 
-struct UserFollow {
+struct UserFollow: Identifiable {
+    var id = UUID()
     var userID: String = ""
     var username: String = ""
     var followed_at: String = ""
