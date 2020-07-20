@@ -1,49 +1,92 @@
 import SwiftUI
 import SwiftyJSON
+import RemoteImage
 
 struct FollowingPage: View {
     @EnvironmentObject var currUser: CurrentUser
+    @State private var followedChannels = [User]()
     
     var body: some View {
         if currUser.userData.id == "" {
             Text("Loading...")
         } else {
-            ScrollView(.vertical) {
-                VStack {
-                    ForEach(currUser.userData.follows) { follow in
-                        HStack {
-                            Text(follow.username)
-                        }.frame(maxWidth: .infinity)
-                    }
+            NavigationView {
+                ScrollView(.vertical) {
+                    VStack(alignment: .leading) {
+                        ForEach(followedChannels) { follow in
+                            HStack {
+                                RemoteImage(type: .url(URL(string: follow.avatar_url)!), errorView: { error in
+                                    Text(error.localizedDescription)
+                                }, imageView: { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 32.0)
+                                }, loadingView: {
+                                    Text("Loading...")
+                                })
+                                Text(follow.name)
+                                    .font(.title)
+                            }
+                        }
+                    }.frame(maxWidth: .infinity)
+                     .onAppear(perform: loadData)
                 }.navigationBarTitle("Followed channels")
-                 .onAppear(perform: loadData)
             }
         }
     }
     
     func loadData() { // gets followed users
+        var followIDs = [String]()
+        
         oauthswift.client.request(BASE_URL + "/users/follows?first=100&from_id=" + currUser.userData.id, method: .GET, headers: ["Client-ID": CLIENT_ID]) { result in
             switch result {
             case .success(let response):
                 if let data = response.string!.data(using: .utf8) {
                     let json = try! JSON(data: data)
                     let parsed = json["data"]
-                    var follows = [UserFollow()]
                     for el in parsed.arrayValue {
-                        print(el)
-                        var follow = UserFollow()
-                        follow.userID = el["to_id"].string!
-                        follow.username = el["to_name"].string!
-                        follow.followed_at = el["followed_at"].string!
-                        follows.append(follow)
+                        followIDs.append(el["to_id"].string!)
                     }
                     
-                    DispatchQueue.main.async {
-                        currUser.userData.follows = follows
+                    var reqURL = BASE_URL + "/users?"
+                    if (followIDs.count > 0) {
+                        for id in followIDs {
+                            reqURL += "id=\(id)&"
+                        }
+                    }
+                    
+                    reqURL.removeLast() // remove last ampersand from for loop
+                    
+                    oauthswift.client.request(reqURL, method: .GET, headers: ["Client-ID": CLIENT_ID]) { result in
+                        switch result {
+                        case .success(let response):
+                            if let data = response.string!.data(using: .utf8) {
+                                let json = try! JSON(data: data)
+                                let parsed = json["data"]
+                                var followedArr = [User]()
+                                for el in parsed.arrayValue {
+                                    var follow = User()
+                                    follow.id = el["id"].string!
+                                    follow.name = el["display_name"].string!
+                                    follow.views = el["view_count"].int!
+                                    follow.offline_image_url = el["offline_image_url"].string!
+                                    follow.avatar_url = el["profile_image_url"].string!
+                                    follow.description = el["description"].string!
+                                    followedArr.append(follow)
+                                }
+                                
+                                DispatchQueue.main.async {
+                                    followedChannels = followedArr
+                                }
+                            }
+                        case .failure(let error):
+                            print("Unable to get follows error: \(error)")
+                        }
                     }
                 }
             case .failure(let error):
-                print("Unable to get follows error: \(error)")
+                print("Unable to get follower IDs: \(error)")
             }
         }
     }
