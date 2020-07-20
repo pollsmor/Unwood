@@ -28,14 +28,11 @@ struct SettingsPage: View {
                     }
                     Text(userData.description)
                 }
-                Text("1")
-                Text("2")
-                Text("3")
             }.navigationBarTitle("Settings")
-             .onAppear(perform: loadData)
         }
     }
     
+    /*
     func loadData() { // gets personal data
         oauthswift.client.request(BASE_URL + "/users", method: .GET, headers: ["Client-ID": CLIENT_ID]) { result in
             switch result {
@@ -43,6 +40,7 @@ struct SettingsPage: View {
                 if let data = response.string!.data(using: .utf8) {
                     let json = try! JSON(data: data)
                     let parsed = json["data"][0]
+                    
                     DispatchQueue.main.async {
                         userData.id = parsed["id"].string!
                         userData.name = parsed["display_name"].string!
@@ -57,6 +55,7 @@ struct SettingsPage: View {
             }
         }
     }
+     */
 }
 
 struct SettingsPage_Previews: PreviewProvider {

@@ -24,7 +24,6 @@ struct UnwoodApp: App {
                     )
                     
                     checkIfSignedIn()
-                    validate()
                 }
         }
     }
