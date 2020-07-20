@@ -8,18 +8,25 @@ struct SettingsPage: View {
     var body: some View {
         NavigationView {
             List {
-                HStack {
-                    RemoteImage(type: .url(URL(string: userData.avatar_url)!), errorView: { error in
-                        Text(error.localizedDescription)
-                    }, imageView: { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 64.0)
-                    }, loadingView: {
-                        Text("Loading...")
-                    })
-                    Text(userData.name)
+                VStack(alignment: .leading) {
+                    HStack {
+                        RemoteImage(type: .url(URL(string: userData.avatar_url)!), errorView: { error in
+                            Text(error.localizedDescription)
+                        }, imageView: { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 64.0)
+                        }, loadingView: {
+                            Text("Loading...")
+                        })
+                        VStack {
+                            Text(userData.name)
+                                .font(.largeTitle)
+                            Text("\(userData.views) views")
+                        }
+                    }
+                    Text(userData.description)
                 }
                 Text("1")
                 Text("2")
@@ -30,8 +37,6 @@ struct SettingsPage: View {
     }
     
     func loadData() { // gets personal data
-        validate()
-        
         oauthswift.client.request(BASE_URL + "/users", method: .GET, headers: ["Client-ID": CLIENT_ID]) { result in
             switch result {
             case .success(let response):

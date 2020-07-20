@@ -55,7 +55,7 @@ func validate() { // required to do this periodically as per Twitch API docs
         case .failure(let error): // access token no longer valid
             print("Validation error: \(error)")
             storeAccessToken(token: "No access token stored.")
-            signIn() // log in again with stored cookies to obtain another token (should be automatic)
+            currUser.isLoggedIn = false
         }
     }
 }
