@@ -14,20 +14,22 @@ struct FollowingPage: View {
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
                         ForEach(followedChannels) { follow in
-                            HStack {
-                                RemoteImage(type: .url(URL(string: follow.avatar_url)!), errorView: { error in
-                                    Text(error.localizedDescription)
-                                }, imageView: { image in
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 32.0)
-                                }, loadingView: {
-                                    Text("Loading...")
-                                })
-                                Text(follow.name)
-                                    .font(.title)
-                            }
+                            NavigationLink(destination: StreamPage(channelName: follow.name)) {
+                                HStack {
+                                    RemoteImage(type: .url(URL(string: follow.avatar_url)!), errorView: { error in
+                                        Text(error.localizedDescription)
+                                    }, imageView: { image in
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 32.0)
+                                    }, loadingView: {
+                                        Text("Loading...")
+                                    })
+                                    Text(follow.name)
+                                        .font(.title)
+                                }
+                            }.buttonStyle(PlainButtonStyle())
                         }
                     }.frame(maxWidth: .infinity)
                      .onAppear(perform: loadData)
