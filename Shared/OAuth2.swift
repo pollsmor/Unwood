@@ -57,7 +57,8 @@ func loadUserData() { // gets personal data
                 
                 DispatchQueue.main.async {
                     currUser.userData.id = parsed["id"].string!
-                    currUser.userData.name = parsed["display_name"].string!
+                    currUser.userData.display_name = parsed["display_name"].string!
+                    currUser.userData.login = parsed["login"].string!
                     currUser.userData.views = parsed["view_count"].int!
                     currUser.userData.offline_image_url = parsed["offline_image_url"].string!
                     currUser.userData.avatar_url = parsed["profile_image_url"].string!

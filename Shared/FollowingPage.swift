@@ -14,7 +14,7 @@ struct FollowingPage: View {
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
                         ForEach(followedChannels) { follow in
-                            NavigationLink(destination: StreamPage(channelName: follow.name)) {
+                            NavigationLink(destination: StreamPage(channelName: follow.login).navigationBarTitle(follow.display_name, displayMode: .inline)) {
                                 HStack {
                                     RemoteImage(type: .url(URL(string: follow.avatar_url)!), errorView: { error in
                                         Text(error.localizedDescription)
@@ -26,7 +26,7 @@ struct FollowingPage: View {
                                     }, loadingView: {
                                         Text("Loading...")
                                     })
-                                    Text(follow.name)
+                                    Text(follow.display_name)
                                         .font(.title)
                                 }
                             }.buttonStyle(PlainButtonStyle())
@@ -70,7 +70,8 @@ struct FollowingPage: View {
                                 for el in parsed.arrayValue {
                                     var follow = User()
                                     follow.id = el["id"].string!
-                                    follow.name = el["display_name"].string!
+                                    follow.display_name = el["display_name"].string!
+                                    follow.login = el["login"].string!
                                     follow.views = el["view_count"].int!
                                     follow.offline_image_url = el["offline_image_url"].string!
                                     follow.avatar_url = el["profile_image_url"].string!

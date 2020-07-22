@@ -21,7 +21,7 @@ struct SettingsPage: View {
                             Text("Loading...")
                         })
                         VStack(alignment: .leading) {
-                            Text(userData.name)
+                            Text(userData.display_name)
                                 .font(.largeTitle)
                             Text("\(userData.views) views")
                         }
