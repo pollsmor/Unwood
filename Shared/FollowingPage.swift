@@ -14,7 +14,7 @@ struct FollowingPage: View {
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
                         ForEach(followedChannels) { follow in
-                            NavigationLink(destination: StreamPage(channelName: follow.login).navigationBarTitle(follow.display_name, displayMode: .inline)) {
+                            NavigationLink(destination: StreamPage(channelName: follow.login)) {
                                 HStack {
                                     RemoteImage(type: .url(URL(string: follow.avatar_url)!), errorView: { error in
                                         Text(error.localizedDescription)

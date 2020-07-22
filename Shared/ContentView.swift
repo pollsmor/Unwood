@@ -8,6 +8,10 @@ struct ContentView: View {
             LoginPage()
         } else {
             TabView {
+                LivePage().tabItem {
+                    Image(systemName: "tv")
+                    Text("Streams")
+                }
                 FollowingPage().tabItem {
                         Image(systemName: "heart.fill")
                         Text("Following")

@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct User: Identifiable {
-    var uniqueID = UUID()
     var id: String = ""
     var login: String = ""
     var display_name: String = ""
