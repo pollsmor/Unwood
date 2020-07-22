@@ -14,27 +14,34 @@ struct LivePage: View {
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
                         ForEach(streams) { stream in
-                            NavigationLink(destination: StreamPage(channelName: stream.login)) {
-                                HStack {
+                            NavigationLink(destination: StreamPage(channelName: stream.login).navigationBarTitle(stream.username, displayMode: .inline)) {
+                                HStack(alignment: .top) {
                                     RemoteImage(type: .url(URL(string: stream.thumbnail_url)!), errorView: { error in
                                         Text(error.localizedDescription)
                                     }, imageView: { image in
                                         image
                                             .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 100.0)
+                                            //.aspectRatio(contentMode: )
+                                            .frame(width: 100.0, height: 60.0)
                                     }, loadingView: {
-                                        Text("Loading...")
+                                        Text("")
                                     })
-                                    Text(stream.username)
-                                        .fontWeight(.bold)
+                                    VStack(alignment: .leading) {
+                                        Text(stream.username)
+                                            .fontWeight(.bold)
+                                        Text(stream.title)
+                                            .lineLimit(2)
+                                        Text("\(stream.viewer_count) viewers")
+                                    }
                                 }
                             }.buttonStyle(PlainButtonStyle())
                         }
                     }.buttonStyle(PlainButtonStyle())
+                    .padding(8.0)
                 }.frame(maxWidth: .infinity)
                 .onAppear(perform: loadData)
-            }.navigationBarTitle("Streams")
+                .navigationBarTitle("Streams")
+            }
         }
     }
     
@@ -102,7 +109,6 @@ struct LivePage: View {
         let start = thumbnailUrl.index(thumbnailUrl.startIndex, offsetBy: 52)
         let end = thumbnailUrl.index(thumbnailUrl.endIndex, offsetBy: -21)
         let range = start..<end
-        print(thumbnailUrl[range])
         return String(thumbnailUrl[range])
     }
 }

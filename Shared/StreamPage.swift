@@ -12,7 +12,7 @@ struct StreamPage: View {
             WebView(url: base_url + channelName + base_url_2)
                 .frame(maxHeight: 300.0)
             Spacer()
-        }.navigationBarTitle(channelName, displayMode: .inline)
+        }
     }
 }
 
