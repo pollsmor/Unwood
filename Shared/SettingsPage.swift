@@ -18,7 +18,8 @@ struct SettingsPage: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 64.0)
                         }, loadingView: {
-                            Text("Loading...")
+                            Image("questionmark")
+                                .frame(width: 64.0)
                         })
                         VStack(alignment: .leading) {
                             Text(userData.display_name)

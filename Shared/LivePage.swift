@@ -21,17 +21,17 @@ struct LivePage: View {
                                     }, imageView: { image in
                                         image
                                             .resizable()
-                                            //.aspectRatio(contentMode: )
                                             .frame(width: 100.0, height: 60.0)
                                     }, loadingView: {
-                                        Text("")
+                                        Image("questionmark")
+                                            .frame(width: 100.0, height: 60.0)
                                     })
                                     VStack(alignment: .leading) {
                                         Text(stream.username)
                                             .fontWeight(.bold)
                                         Text(stream.title)
                                             .lineLimit(2)
-                                        Text("\(stream.viewer_count) viewers")
+                                        stream.viewer_count == 1 ? Text("1 viewer") : Text("\(stream.viewer_count) viewers")
                                     }
                                 }
                             }.buttonStyle(PlainButtonStyle())

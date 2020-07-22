@@ -24,7 +24,8 @@ struct FollowingPage: View {
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 32.0)
                                     }, loadingView: {
-                                        Text("Loading...")
+                                        Image("questionmark")
+                                            .frame(width: 32.0)
                                     })
                                     Text(follow.display_name)
                                         .font(.title)
