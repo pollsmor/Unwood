@@ -18,7 +18,7 @@ struct SettingsPage: View {
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 64.0)
                         }, loadingView: {
-                            Image("questionmark")
+                            ProgressView()
                                 .frame(width: 64.0)
                         })
                         VStack(alignment: .leading) {

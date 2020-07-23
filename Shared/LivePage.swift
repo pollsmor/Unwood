@@ -8,7 +8,7 @@ struct LivePage: View {
     
     var body: some View {
         if currUser.userData.id == "" {
-            Text("Loading...")
+            ProgressView()
         } else {
             NavigationView {
                 ScrollView(.vertical) {
@@ -23,8 +23,7 @@ struct LivePage: View {
                                             .resizable()
                                             .frame(width: 100.0, height: 60.0)
                                     }, loadingView: {
-                                        Image("questionmark")
-                                            .frame(width: 100.0, height: 60.0)
+                                        ProgressView()
                                     })
                                     VStack(alignment: .leading) {
                                         Text(stream.username)

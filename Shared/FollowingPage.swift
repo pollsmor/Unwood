@@ -8,7 +8,7 @@ struct FollowingPage: View {
     
     var body: some View {
         if currUser.userData.id == "" {
-            Text("Loading...")
+            ProgressView()
         } else {
             NavigationView {
                 ScrollView(.vertical) {
@@ -24,8 +24,7 @@ struct FollowingPage: View {
                                             .aspectRatio(contentMode: .fit)
                                             .frame(width: 32.0)
                                     }, loadingView: {
-                                        Image("questionmark")
-                                            .frame(width: 32.0)
+                                        ProgressView()
                                     })
                                     Text(follow.display_name)
                                         .font(.title)
