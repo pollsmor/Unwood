@@ -25,6 +25,7 @@ struct FollowingPage: View {
                                             .frame(width: 32.0)
                                     }, loadingView: {
                                         ProgressView()
+                                            .frame(width: 32.0)
                                     })
                                     Text(follow.display_name)
                                         .font(.title)

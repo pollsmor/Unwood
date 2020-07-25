@@ -24,6 +24,7 @@ struct LivePage: View {
                                             .frame(width: 100.0, height: 60.0)
                                     }, loadingView: {
                                         ProgressView()
+                                            .frame(width: 100.0, height: 60.0)
                                     })
                                     VStack(alignment: .leading) {
                                         Text(stream.username)
