@@ -18,13 +18,13 @@ struct WebView: UIViewRepresentable {
         config.mediaTypesRequiringUserActionForPlayback = []
         config.userContentController.addUserScript(self.getZoomDisableScript())
         
-        return WKWebView(frame: .zero, configuration: config)
+        let url = URL(string: self.url)!
+        let request = URLRequest(url: url)
+        let view = WKWebView(frame: .zero, configuration: config)
+        view.load(request)
+        return view
     }
     
     func updateUIView(_ view: WKWebView, context: Context) {
-        let url = URL(string: self.url)!
-
-        let request = URLRequest(url: url)
-        view.load(request)
     }
 }

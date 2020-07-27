@@ -6,7 +6,6 @@ let base_url_2 = "&enableExtensions=false&muted=false&parent=twitch.tv&player=po
 struct StreamPage: View {
     let channelName: String
     @State private var showToolbar = false
-    @State private var opacity = 1.0
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     var body: some View {
@@ -14,29 +13,23 @@ struct StreamPage: View {
             ZStack(alignment: .top) {
                 WebView(url: base_url + channelName + base_url_2)
                     .frame(minHeight: 250.0)
-                    .opacity(opacity)
                     .onTapGesture() {
                         showToolbar.toggle()
-                        if opacity == 1.0 {
-                            opacity = 0.3
-                        } else {
-                            opacity = 1.0
-                        }
                     }
-                    .transition(.opacity)
-                    .animation(.default)
                 if showToolbar {
                     HStack {
                         Button(action: {
                             mode.wrappedValue.dismiss()
                         }) {
                             Text("< Streams")
+                                .foregroundColor(.blue)
+                                .padding(8.0)
                         }
                         Spacer()
-                        Text("pollsmor")
-                    }.background(Color.black)
-                    .padding(.init(top: 8.0, leading: 8.0, bottom: 16.0, trailing: 8.0))
-                    .transition(.opacity)
+                        Text(channelName)
+                            .padding(8.0)
+                    }.background(Color.white)
+                    .transition(.slide)
                     .animation(.default)
                 } else {
                     EmptyView()
