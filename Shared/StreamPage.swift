@@ -36,7 +36,7 @@ struct StreamPage: View {
                 }
             }
             WebView(url: "https://www.twitch.tv/embed/" + channelName + "/chat?darkpopout&parent=com.pollsmor.unwood")
-        }
+        }.navigationBarHidden(true)
     }
 }
 
