@@ -9,6 +9,8 @@ struct SettingsPage: View {
         NavigationView {
             List {
                 VStack(alignment: .leading) {
+                    Text("Unwood for Twitch")
+                        .font(.largeTitle)
                     HStack {
                         RemoteImage(type: .url(URL(string: userData.avatar_url)!), errorView: { error in
                             Text(error.localizedDescription)
