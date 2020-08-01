@@ -17,7 +17,7 @@ Demo video: https://streamable.com/anyrjv
 ## Technical details that I guess people may want to know ##
 - OAuth2 flow: implicit (as [recommended](https://dev.twitch.tv/docs/authentication#getting-tokens) by Twitch), does not use a client secret
 - iOS 14 and above only (Xcode 12+) as this uses the new SwiftUI app lifecycle without AppDelegate or SceneDelegate
-- Necessitates the use of a Node.js server to provide direct stream URL (feels like a very ghetto solution, not sure if I should keep using this, oh yeah it's not HTTPs)
+- Necessitates the use of a Node.js server to provide direct stream URL (feels like a very ghetto solution, not sure if I should keep using this, oh yeah it's not HTTPS)
 
 ## Required libraries ##
 Install using the Swift Package Manager.

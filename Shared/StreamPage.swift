@@ -17,12 +17,18 @@ struct StreamPage: View {
         .onAppear() {
             try! AVAudioSession.sharedInstance().setCategory(.playback)
             
-            let url = URL(string: "http://0.tcp.ngrok.io:16327/stream?username=" + channelName)!
+            let url = URL(string: "http://2.tcp.ngrok.io:10372/stream?username=" + channelName)!
             let request = URLRequest(url: url)
             URLSession.shared.dataTask(with: request) { data, response, error in
-                let json = try! JSON(data: data!)
-                print(json)
-                player = AVPlayer(url: URL(string: json[0]["url"].string!)!)
+                if let data = data {
+                    let json = try! JSON(data: data)
+                    print(json)
+                    DispatchQueue.main.async {
+                        player = AVPlayer(url: URL(string: json[0]["url"].string!)!)
+                    }
+                } else {
+                    print("Could not connect to Node.js server.")
+                }
             }.resume()
         }
     }
