@@ -8,9 +8,9 @@ struct SettingsPage: View {
     var body: some View {
         NavigationView {
             List {
+                Text("Unwood for Twitch")
+                    .font(.largeTitle)
                 VStack(alignment: .leading) {
-                    Text("Unwood for Twitch")
-                        .font(.largeTitle)
                     HStack {
                         RemoteImage(type: .url(URL(string: userData.avatar_url)!), errorView: { error in
                             Text(error.localizedDescription)
@@ -26,18 +26,12 @@ struct SettingsPage: View {
                         VStack(alignment: .leading) {
                             Text(userData.display_name)
                                 .font(.largeTitle)
-                            Text("\(userData.views) views")
+                            userData.views == 1 ? Text("1 view") : Text("\(userData.views) views")
                         }
                     }
                     Text(userData.description)
                 }
             }.navigationBarTitle("Settings")
         }
-    }
-}
-
-struct SettingsPage_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsPage()
     }
 }

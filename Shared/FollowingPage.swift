@@ -14,7 +14,7 @@ struct FollowingPage: View {
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
                         ForEach(followedChannels) { follow in
-                            NavigationLink(destination: StreamPage(channelName: follow.login)) {
+                            NavigationLink(destination: StreamPage(channel: follow.login)) {
                                 HStack {
                                     RemoteImage(type: .url(URL(string: follow.avatar_url)!), errorView: { error in
                                         Text(error.localizedDescription)
@@ -93,11 +93,5 @@ struct FollowingPage: View {
                 print("Unable to get follower IDs: \(error)")
             }
         }
-    }
-}
-
-struct FollowingPage_Previews: PreviewProvider {
-    static var previews: some View {
-        FollowingPage()
     }
 }

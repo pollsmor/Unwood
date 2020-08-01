@@ -2,10 +2,10 @@ import SwiftUI
 import WebKit
 
 struct WebView: UIViewRepresentable {
-    var url: String
+    let url: String
 
-    private func getZoomDisableScript() -> WKUserScript {
-        let source: String = "var meta = document.createElement('meta');" +
+    private func getZoomDisableScript() -> WKUserScript { // barely have any space to work with as it is
+        let source = "var meta = document.createElement('meta');" +
             "meta.name = 'viewport';" +
             "meta.content = 'width=device-width, initial-scale=1.0, maximum- scale=1.0, user-scalable=no';" +
             "var head = document.getElementsByTagName('head')[0];" + "head.appendChild(meta);"
@@ -14,6 +14,7 @@ struct WebView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
+        // Next two lines allow for playback without going into fullscreen
         config.allowsInlineMediaPlayback = true
         config.mediaTypesRequiringUserActionForPlayback = []
         config.userContentController.addUserScript(self.getZoomDisableScript())

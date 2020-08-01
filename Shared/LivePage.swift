@@ -14,7 +14,7 @@ struct LivePage: View {
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
                         ForEach(streams) { stream in
-                            NavigationLink(destination: StreamPage(channelName: stream.login).navigationBarTitle(stream.username, displayMode: .inline)) {
+                            NavigationLink(destination: StreamPage(channel: stream.login).navigationBarTitle(stream.username, displayMode: .inline)) {
                                 HStack(alignment: .top) {
                                     RemoteImage(type: .url(URL(string: stream.thumbnail_url)!), errorView: { error in
                                         Text(error.localizedDescription)
@@ -110,11 +110,5 @@ struct LivePage: View {
         let end = thumbnailUrl.index(thumbnailUrl.endIndex, offsetBy: -21)
         let range = start..<end
         return String(thumbnailUrl[range])
-    }
-}
-
-struct LivePage_Previews: PreviewProvider {
-    static var previews: some View {
-        LivePage()
     }
 }

@@ -1,23 +1,23 @@
 import SwiftUI
-import AVKit
 import SwiftyJSON
+import AVKit
 
 let base_url = "https://player.twitch.tv/?channel="
 let base_url_2 = "&enableExtensions=false&muted=false&parent=twitch.tv&player=popout&volume=1.0"
 
 struct StreamPage: View {
-    let channelName: String
+    let channel: String
     @State var player = AVPlayer()
     
     var body: some View {
         VStack(spacing: 0) {
             VideoPlayer(player: player)
-            WebView(url: "https://www.twitch.tv/embed/" + channelName + "/chat?darkpopout&parent=com.pollsmor.unwood")
+            WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood")
         }
         .onAppear() {
             try! AVAudioSession.sharedInstance().setCategory(.playback)
             
-            let url = URL(string: "http://2.tcp.ngrok.io:10372/stream?username=" + channelName)!
+            let url = URL(string: "http://localhost:8081/stream?channel=" + channel)!
             let request = URLRequest(url: url)
             URLSession.shared.dataTask(with: request) { data, response, error in
                 if let data = data {
@@ -31,11 +31,5 @@ struct StreamPage: View {
                 }
             }.resume()
         }
-    }
-}
-
-struct StreamPage_Previews: PreviewProvider {
-    static var previews: some View {
-        StreamPage(channelName: "pollsmor")
     }
 }
