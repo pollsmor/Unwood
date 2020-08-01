@@ -45,7 +45,7 @@ struct LivePage: View {
         }
     }
     
-    func loadData() { // gets followed users
+    private func loadData() { // gets followed users
         var followIDs = [String]()
         
         oauthswift.client.request(BASE_URL + "/users/follows?first=100&from_id=" + currUser.userData.id, method: .GET, headers: ["Client-ID": CLIENT_ID]) { result in

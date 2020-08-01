@@ -1,11 +1,6 @@
 import SwiftUI
 import OAuthSwift
 
-class CurrentUser: ObservableObject {
-    @Published var isLoggedIn = false
-    @Published var userData = User()
-}
-
 var currUser = CurrentUser()
 
 @main
@@ -23,7 +18,8 @@ struct UnwoodApp: App {
                         oauthSwift: oauthswift
                     )
                     
-                    checkIfSignedIn()
+                    checkIfSignedIn() // for conditional in ContentView
+                    validate()
                 }
         }
     }

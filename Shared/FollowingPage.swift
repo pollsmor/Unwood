@@ -14,23 +14,20 @@ struct FollowingPage: View {
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
                         ForEach(followedChannels) { follow in
-                            NavigationLink(destination: StreamPage(channel: follow.login)) {
-                                HStack {
-                                    RemoteImage(type: .url(URL(string: follow.avatar_url)!), errorView: { error in
-                                        Text(error.localizedDescription)
-                                    }, imageView: { image in
-                                        image
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 32.0)
-                                    }, loadingView: {
-                                        ProgressView()
-                                            .frame(width: 32.0)
-                                    })
-                                    Text(follow.display_name)
-                                        .font(.title)
-                                }
-                            }.buttonStyle(PlainButtonStyle())
+                            HStack {
+                                RemoteImage(type: .url(URL(string: follow.avatar_url)!), errorView: { error in
+                                }, imageView: { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 32.0)
+                                }, loadingView: {
+                                    ProgressView()
+                                        .frame(width: 32.0)
+                                })
+                                Text(follow.display_name)
+                                    .font(.title)
+                            }
                         }
                     }.frame(maxWidth: .infinity)
                      .onAppear(perform: loadData)
@@ -39,7 +36,7 @@ struct FollowingPage: View {
         }
     }
     
-    func loadData() { // gets followed users
+    private func loadData() { // gets followed users
         var followIDs = [String]()
         
         oauthswift.client.request(BASE_URL + "/users/follows?first=100&from_id=" + currUser.userData.id, method: .GET, headers: ["Client-ID": CLIENT_ID]) { result in

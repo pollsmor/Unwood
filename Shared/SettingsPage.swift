@@ -8,12 +8,9 @@ struct SettingsPage: View {
     var body: some View {
         NavigationView {
             List {
-                Text("Unwood for Twitch")
-                    .font(.largeTitle)
                 VStack(alignment: .leading) {
                     HStack {
                         RemoteImage(type: .url(URL(string: userData.avatar_url)!), errorView: { error in
-                            Text(error.localizedDescription)
                         }, imageView: { image in
                             image
                                 .resizable()
@@ -31,6 +28,8 @@ struct SettingsPage: View {
                     }
                     Text(userData.description)
                 }
+                Text("Unwood for Twitch")
+                    .fontWeight(.bold)
             }.navigationBarTitle("Settings")
         }
     }

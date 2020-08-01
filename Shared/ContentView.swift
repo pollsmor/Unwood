@@ -15,7 +15,7 @@ struct ContentView: View {
                 FollowingPage().tabItem {
                         Image(systemName: "heart.fill")
                         Text("Following")
-                }.onAppear(perform: loadUserData)
+                }.onAppear(perform: loadUserData) // need username to pull up followed channels list
                 SettingsPage().tabItem {
                     Image(systemName: "gear")
                     Text("Settings")
