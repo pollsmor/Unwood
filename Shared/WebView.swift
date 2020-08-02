@@ -14,12 +14,14 @@ struct WebView: UIViewRepresentable {
     
     private func getBitsRemoveScript() -> WKUserScript {
         let source = """
-            var func = function() {
+            var removeLeaderboard = function() {
                 var el = document.querySelector(".channel-leaderboard");
                 el.parentNode.removeChild(el);
+                
+                document.body.removeEventListener("click", removeLeaderboard);
             }
 
-            setInterval(func, 1000);
+            document.body.addEventListener("click", removeLeaderboard);
         """
         return WKUserScript(source: source as String, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
     }

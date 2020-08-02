@@ -1,7 +1,7 @@
 # Unwood
 (Learning SwiftUI) Third-party Twitch client for iOS 14+
 
-Demo video: https://streamable.com/anyrjv
+Demo video: https://streamable.com/vj8kxw
 
 *Xcode 12 beta 3 has an issue with horrible performance of WebViews/VideoPlayers when in the iOS simulator. This issue is not present on a physical device.*
 
