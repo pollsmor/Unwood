@@ -14,7 +14,7 @@ struct LivePage: View {
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
                         ForEach(streams) { stream in
-                            NavigationLink(destination: StreamPage(channel: stream.login).navigationBarTitle(stream.username, displayMode: .inline)) {
+                            NavigationLink(destination: StreamPage(channel: stream.login)) {
                                 HStack(alignment: .top) {
                                     RemoteImage(type: .url(URL(string: stream.thumbnail_url)!), errorView: { error in
                                         Text(error.localizedDescription)

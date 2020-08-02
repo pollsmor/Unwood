@@ -5,18 +5,40 @@ import AVKit
 struct StreamPage: View {
     let channel: String
     @State var player = AVPlayer()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // for back button
+    @State private var showExtraControls = false
     
     var body: some View {
         VStack(spacing: 0) {
-            VideoPlayer(player: player) {
-                Text("xd")
-            }.frame(height: UIScreen.main.bounds.size.width / 16 * 9)
-            .onAppear(perform: loadVideoPlayer)
-            .onDisappear() {
-                player.pause()
+            VideoPlayer(player: player)
+                .frame(height: UIScreen.main.bounds.size.width / 16 * 9)
+                .onAppear(perform: loadVideoPlayer)
+                .onDisappear() {
+                    player.pause()
+                }
+                .onTapGesture() {
+                    withAnimation {
+                        showExtraControls.toggle()
+                    }
+                }
+            if showExtraControls {
+                HStack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 20.0, weight: .medium))
+                            Text("Streams")
+                        }
+                    }
+                }.padding(16.0)
+            } else {
+                EmptyView()
             }
             WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
         }
+        .navigationBarHidden(true)
     }
     
     private func loadVideoPlayer() {
