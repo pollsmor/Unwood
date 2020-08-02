@@ -12,12 +12,25 @@ struct WebView: UIViewRepresentable {
         return WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
     }
     
+    private func getBitsRemoveScript() -> WKUserScript {
+        let source = """
+            var func = function() {
+                var el = document.querySelector(".channel-leaderboard");
+                el.parentNode.removeChild(el);
+            }
+
+            setInterval(func, 1000);
+        """
+        return WKUserScript(source: source as String, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+    }
+    
     func makeUIView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
         // Next two lines allow for playback without going into fullscreen
         config.allowsInlineMediaPlayback = true
         config.mediaTypesRequiringUserActionForPlayback = []
         config.userContentController.addUserScript(self.getZoomDisableScript())
+        config.userContentController.addUserScript(self.getBitsRemoveScript())
         
         let url = URL(string: self.url)!
         let request = URLRequest(url: url)
