@@ -10,10 +10,13 @@ struct StreamPage: View {
         VStack(spacing: 0) {
             VideoPlayer(player: player) {
                 Text("xd")
+            }.frame(height: UIScreen.main.bounds.size.width / 16 * 9)
+            .onAppear(perform: loadVideoPlayer)
+            .onDisappear() {
+                player.pause()
             }
             WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
         }
-        .onAppear(perform: loadVideoPlayer)
     }
     
     private func loadVideoPlayer() {
@@ -27,6 +30,7 @@ struct StreamPage: View {
                 print(json)
                 DispatchQueue.main.async {
                     player = AVPlayer(url: URL(string: json[0]["url"].string!)!)
+                    player.play()
                 }
             }
         }.resume()

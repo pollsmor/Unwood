@@ -12,7 +12,7 @@ Demo video: https://streamable.com/vj8kxw
 - Settings page (only shows profile information atm)
 - Click on a stream to pull up the chat (uses a WebView of the popout chat as I can't find a good and simple IRC library for Swift)
 - Also pulls up the video from the direct m3u8 URL
-  - Video's audio keeps playing in the background + restarts when going back (undesired)
+  - The video page should not show the bottom tab bar or the top navigation bar. The former cannot be fixed at the moment due to a SwiftUI limitation.
 
 ## Technical details that I guess people may want to know ##
 - OAuth2 flow: implicit (as [recommended](https://dev.twitch.tv/docs/authentication#getting-tokens) by Twitch), does not use a client secret
