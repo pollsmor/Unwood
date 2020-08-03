@@ -1,7 +1,7 @@
 import SwiftUI
 import WebKit
 
-struct WebView: UIViewRepresentable {
+struct WebView: UIViewRepresentable { // for chat embed
     let url: String
 
     private func getZoomDisableScript() -> WKUserScript { // barely have any space to work with as it is
@@ -12,27 +12,30 @@ struct WebView: UIViewRepresentable {
         return WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
     }
     
-    private func getBitsRemoveScript() -> WKUserScript {
+    private func getMoreChatSpaceScript() -> WKUserScript {
         let source = """
-            var removeLeaderboard = function() {
-                var el = document.querySelector(".channel-leaderboard");
-                el.parentNode.removeChild(el);
+            var getMoreChatSpace = function() {
+                var leaderboard = document.querySelector(".channel-leaderboard");
+                leaderboard.parentNode.removeChild(leaderboard);
+
+                var bottomBar = document.querySelector(".chat-input__buttons-container");
+                bottomBar.parentNode.removeChild(bottomBar)
                 
-                document.body.removeEventListener("click", removeLeaderboard);
+                document.body.removeEventListener("click", getMoreChatSpace);
             }
 
-            document.body.addEventListener("click", removeLeaderboard);
+            document.body.addEventListener("click", getMoreChatSpace);
         """
         return WKUserScript(source: source as String, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
     }
-    
+
     func makeUIView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
         // Next two lines allow for playback without going into fullscreen
         config.allowsInlineMediaPlayback = true
         config.mediaTypesRequiringUserActionForPlayback = []
         config.userContentController.addUserScript(self.getZoomDisableScript())
-        config.userContentController.addUserScript(self.getBitsRemoveScript())
+        config.userContentController.addUserScript(self.getMoreChatSpaceScript())
         
         let url = URL(string: self.url)!
         let request = URLRequest(url: url)

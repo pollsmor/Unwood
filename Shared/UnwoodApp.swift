@@ -19,7 +19,6 @@ struct UnwoodApp: App {
                     )
                     
                     checkIfSignedIn() // for conditional in ContentView
-                    validate()
                 }
         }
     }

@@ -26,18 +26,18 @@ struct StreamPage: View {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
-                        HStack {
+                        HStack(spacing: 4.0) {
                             Image(systemName: "chevron.left")
-                                .font(.system(size: 20.0, weight: .medium))
+                                .font(.system(size: 24.0, weight: .medium))
                             Text("Streams")
                         }
                     }
-                }.padding(16.0)
+                }.padding(10.0)
             } else {
                 EmptyView()
             }
             WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
-        }
+        }.navigationBarTitle("")
         .navigationBarHidden(true)
     }
     
