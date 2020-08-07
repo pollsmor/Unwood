@@ -11,11 +11,11 @@ struct ContentView: View {
                 LivePage().tabItem {
                     Image(systemName: "tv")
                     Text("Streams")
-                }
+                }.onAppear(perform: loadUserData) // need username to pull up followed channels list
                 FollowingPage().tabItem {
                         Image(systemName: "heart.fill")
                         Text("Following")
-                }.onAppear(perform: loadUserData) // need username to pull up followed channels list
+                }
                 SettingsPage().tabItem {
                     Image(systemName: "gear")
                     Text("Settings")

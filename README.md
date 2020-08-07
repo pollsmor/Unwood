@@ -3,7 +3,7 @@
 
 Demo video: https://streamable.com/vj8kxw
 
-*Xcode 12 beta 3 has an issue with horrible performance of WebViews/VideoPlayers when in the iOS simulator. This issue is not present on a physical device.*
+*Xcode 12 beta 3/4 has an issue with horrible performance of WebViews/VideoPlayers when in the iOS simulator. This issue is not present on a physical device.*
 
 ## Currently supported features
 - Login with Twitch mechanism
@@ -13,6 +13,7 @@ Demo video: https://streamable.com/vj8kxw
 - Click on a stream to pull up the chat (uses a WebView of the popout chat as I can't find a good and simple IRC library for Swift)
 - Also pulls up the video from the direct m3u8 URL
   - The video page should not show the bottom tab bar or the top navigation bar. The former cannot be fixed at the moment due to a SwiftUI limitation.
+  - The latter has a very hacky solution that makes it so that the top half of the video does not respond to touch. However, I think it's a worthy trade-off.
 
 ## Technical details that I guess people may want to know ##
 - OAuth2 flow: implicit (as [recommended](https://dev.twitch.tv/docs/authentication#getting-tokens) by Twitch), does not use a client secret

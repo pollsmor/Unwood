@@ -31,6 +31,6 @@ struct SettingsPage: View {
                 Text("Unwood for Twitch")
                     .fontWeight(.bold)
             }.navigationBarTitle("Settings")
-        }
+        }.onAppear(perform: validate)
     }
 }

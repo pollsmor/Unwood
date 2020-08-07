@@ -10,6 +10,8 @@ struct StreamPage: View {
     
     var body: some View {
         VStack(spacing: 0) {
+            Spacer()
+                .frame(height: UIApplication.shared.windows[0].windowScene?.statusBarManager!.statusBarFrame.height)
             VideoPlayer(player: player)
                 .frame(height: UIScreen.main.bounds.size.width / 16 * 9)
                 .onAppear(perform: loadVideoPlayer)
@@ -37,14 +39,15 @@ struct StreamPage: View {
                 EmptyView()
             }
             WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
-        }.navigationBarTitle("")
-        .navigationBarHidden(true)
+        }.navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea([.top])
     }
     
     private func loadVideoPlayer() {
         try! AVAudioSession.sharedInstance().setCategory(.playback) // allow audio playback with mute switch on
         
-        let url = URL(string: "http://2.tcp.ngrok.io:14716/stream?channel=" + channel)!
+        let url = URL(string: "http://localhost:8081/stream?channel=" + channel)!
         let request = URLRequest(url: url) // connnect to personal Node.js server
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
