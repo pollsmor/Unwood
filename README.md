@@ -1,9 +1,9 @@
 # Unwood
 (Learning SwiftUI) Third-party Twitch client for iOS 14+
 
-Demo video: https://streamable.com/vj8kxw
+The name of the app is an inside joke, but so are most of the stuff I name :)
 
-*Xcode 12 beta 3/4 has an issue with horrible performance of WebViews/VideoPlayers when in the iOS simulator. This issue is not present on a physical device.*
+Demo video: https://streamable.com/wu4jye
 
 ## Currently supported features
 - Login with Twitch mechanism
