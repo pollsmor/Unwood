@@ -41,6 +41,9 @@ struct WebView: UIViewRepresentable { // for chat embed
         let request = URLRequest(url: url)
         let view = WKWebView(frame: .zero, configuration: config)
         view.load(request)
+        
+        view.frame.size.height = 1
+        view.frame.size = view.scrollView.contentSize
         return view
     }
     
