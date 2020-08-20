@@ -4,6 +4,8 @@ import AVKit
 
 struct StreamPage: View {
     let channel: String
+    let width = UIScreen.main.bounds.width
+    let height = UIScreen.main.bounds.height
     @State var player = AVPlayer()
     @State private var showExtraControls = false
     @State private var showChat = true
@@ -16,7 +18,7 @@ struct StreamPage: View {
                 Spacer()
                     .frame(height: UIApplication.shared.windows[0].windowScene?.statusBarManager!.statusBarFrame.height)
                 VideoPlayer(player: player)
-                    .frame(height: UIScreen.main.bounds.size.width / 16 * 9)
+                    .frame(height: width / 16 * 9)
                     .onAppear(perform: loadVideoPlayer)
                     .onDisappear() {
                         player.pause()
@@ -57,6 +59,8 @@ struct StreamPage: View {
                     }
                 if showChat {
                     WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
+                        .frame(idealWidth: width * 0.3)
+                        .fixedSize(horizontal: true, vertical: false)
                 }
             }
             .navigationBarTitle(channel)

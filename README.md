@@ -14,8 +14,6 @@ Demo video: https://streamable.com/wu4jye
 - Also pulls up the video from the direct m3u8 URL
   - The video page should not show the bottom tab bar or the top navigation bar. The former cannot be fixed at the moment due to a SwiftUI limitation.
   - The latter has a very hacky solution that makes it so that the top half of the video does not respond to touch. However, I think it's a worthy trade-off.
-- Landscape splits the space occupied by chat 50-50. Weird stuff starts happening if I set it to a more "typical" split like 65-35. 
-  - Double tap the stream to hide/show chat.
 
 ## Technical details that I guess people may want to know ##
 - OAuth2 flow: implicit (as [recommended](https://dev.twitch.tv/docs/authentication#getting-tokens) by Twitch), does not use a client secret
