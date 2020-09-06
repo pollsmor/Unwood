@@ -4,67 +4,21 @@ import AVKit
 
 struct StreamPage: View {
     let channel: String
-    let width = UIScreen.main.bounds.width
-    let height = UIScreen.main.bounds.height
     @State var player = AVPlayer()
     @State private var showExtraControls = false
     @State private var showChat = true
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode> // for back button
-    @Environment(\.verticalSizeClass) var sizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
-        if sizeClass == .regular {
-            VStack(spacing: 0) {
-                Spacer()
-                    .frame(height: UIApplication.shared.windows[0].windowScene?.statusBarManager!.statusBarFrame.height)
-                VideoPlayer(player: player)
-                    .frame(height: width / 16 * 9)
-                    .onAppear(perform: loadVideoPlayer)
-                    .onDisappear() {
-                        player.pause()
-                    }
-                    .onTapGesture() {
-                        withAnimation {
-                            showExtraControls.toggle()
-                        }
-                    }
-                if showExtraControls {
-                    HStack {
-                        Button(action: {
-                            presentationMode.wrappedValue.dismiss()
-                        }) {
-                            HStack(spacing: 4.0) {
-                                Image(systemName: "chevron.left")
-                                    .font(.system(size: 24.0, weight: .medium))
-                                Text("Streams")
-                            }
-                        }
-                    }.padding(10.0)
+        VStack(spacing: 0) {
+            VideoPlayer(player: player)
+                .frame(height: verticalSizeClass == .regular ? UIScreen.main.bounds.width / 16 * 9: UIScreen.main.bounds.height * 0.8)
+                .onAppear(perform: loadVideoPlayer)
+                .onDisappear() {
+                    player.pause()
                 }
-                WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
-            }.navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-            .edgesIgnoringSafeArea([.top])
-        } else {
-            HStack(spacing: 0) {
-                VideoPlayer(player: player)
-                    .onAppear(perform: loadVideoPlayer)
-                    .onDisappear() {
-                        player.pause()
-                    }
-                    .onTapGesture(count: 2) {
-                        withAnimation {
-                            showChat.toggle()
-                        }
-                    }
-                if showChat {
-                    WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
-                        .frame(idealWidth: width * 0.3)
-                        .fixedSize(horizontal: true, vertical: false)
-                }
-            }
-            .navigationBarTitle(channel)
-        }
+            WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
+        }.navigationBarTitle(channel, displayMode: .inline)
     }
     
     private func loadVideoPlayer() {
