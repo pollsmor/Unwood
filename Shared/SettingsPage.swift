@@ -3,13 +3,13 @@ import SwiftyJSON
 import RemoteImage
 
 struct SettingsPage: View {
-    @State private var userData = currUser.userData
+    @EnvironmentObject var currUser: CurrentUser
     
     var body: some View {
         List {
             VStack(alignment: .leading) {
                 HStack {
-                    RemoteImage(type: .url(URL(string: userData.avatar_url)!), errorView: { error in
+                    RemoteImage(type: .url(URL(string: currUser.userData.avatar_url)!), errorView: { error in
                     }, imageView: { image in
                         image
                             .resizable()
@@ -20,12 +20,12 @@ struct SettingsPage: View {
                             .frame(width: 64.0)
                     })
                     VStack(alignment: .leading) {
-                        Text(userData.display_name)
+                        Text(currUser.userData.display_name)
                             .font(.largeTitle)
-                        userData.views == 1 ? Text("1 view") : Text("\(userData.views) views")
+                        currUser.userData.views == 1 ? Text("1 view") : Text("\(currUser.userData.views) views")
                     }
                 }
-                Text(userData.description)
+                Text(currUser.userData.description)
             }
             Text("Unwood for Twitch")
                 .fontWeight(.bold)

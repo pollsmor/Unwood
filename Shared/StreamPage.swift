@@ -7,18 +7,20 @@ struct StreamPage: View {
     @State private var player = AVPlayer()
     @State private var qualityOptions = [Video]()
     @State private var showActionSheet = false
-    @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass // for landscape mode
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         VStack(spacing: 0) {
             VideoPlayer(player: player)
-                .frame(height: verticalSizeClass == .regular ? UIScreen.main.bounds.width / 16 * 9: UIScreen.main.bounds.height * 0.8)
+                .frame(height: verticalSizeClass == .regular ? UIScreen.main.bounds.width / 16 * 9: UIScreen.main.bounds.height * 0.9)
                 .onAppear(perform: loadVideoPlayer)
                 .onDisappear() {
                     player.pause()
                 }
-                .disabled(true)
-            WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
+            colorScheme == .light ?
+                WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?parent=com.pollsmor.unwood") :
+                WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
         }.navigationBarTitle(channel, displayMode: .inline)
         .navigationBarItems(trailing:
                                 Button(action: {
