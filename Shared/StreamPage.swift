@@ -5,8 +5,9 @@ import AVKit
 struct StreamPage: View {
     let channel: String
     @State var player = AVPlayer()
-    @State private var showExtraControls = false
-    @State private var showChat = true
+    @State var qualityOptions = [Video]()
+    @State private var videoURL = ""
+    @State private var showActionSheet = false
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
     var body: some View {
@@ -19,6 +20,20 @@ struct StreamPage: View {
                 }
             WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
         }.navigationBarTitle(channel, displayMode: .inline)
+        .navigationBarItems(trailing:
+                                Button(action: {
+                                    self.showActionSheet.toggle()
+                                }) {
+                Image(systemName: "gear")
+                                }.actionSheet(isPresented: $showActionSheet) {
+                                    ActionSheet(title: Text("Quality"), message: Text("Select a quality option."), buttons: qualityOptions.map { qualityOption in
+                                        .default(Text(qualityOption.quality)) {
+                                            self.player = AVPlayer(url: URL(string: qualityOption.url)!)
+                                            self.player.play()
+                                        }
+                                    })
+                                }
+        )
     }
     
     private func loadVideoPlayer() {
@@ -31,7 +46,16 @@ struct StreamPage: View {
                 let json = try! JSON(data: data)
                 print(json)
                 DispatchQueue.main.async {
-                    player = AVPlayer(url: URL(string: json[0]["url"].string!)!)
+                    for qualityOption in json.arrayValue {
+                        qualityOptions.append(
+                            Video(
+                                quality: qualityOption["quality"].string!,
+                                url: qualityOption["url"].string!
+                            )
+                        )
+                    }
+                    
+                    player = AVPlayer(url: URL(string: json[0]["url"].string!)!) // play source quality
                     player.play()
                 }
             }

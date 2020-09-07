@@ -36,3 +36,8 @@ struct Stream: Identifiable {
     var language: String = ""
     var thumbnail_url: String = questionmark_url
 }
+
+struct Video {
+    var quality: String
+    var url: String
+}

@@ -14,6 +14,7 @@ Demo video: https://streamable.com/wu4jye
   - That means you will have to log in twice for full functionality
 - Also pulls up the video from the direct m3u8 URL
   - The video page should ideally not show the bottom tab bar or the top navigation bar. Neither can be fixed at the moment due to a SwiftUI limitation.
+  - Quality options
 
 ## Technical details that I guess people may want to know ##
 - OAuth2 flow: implicit (as [recommended](https://dev.twitch.tv/docs/authentication#getting-tokens) by Twitch), does not use a client secret
