@@ -9,8 +9,8 @@ struct LivePage: View {
     var body: some View {
         if currUser.userData.id == "" {
             ProgressView()
+                .onAppear(perform: loadUserData) // need username to pull up followed channels list)
         } else {
-            NavigationView {
                 ScrollView(.vertical) {
                     VStack(alignment: .leading) {
                         ForEach(streams) { stream in
@@ -39,9 +39,9 @@ struct LivePage: View {
                     }.buttonStyle(PlainButtonStyle())
                     .padding(8.0)
                 }.frame(maxWidth: .infinity)
-                .onAppear(perform: loadData)
-                .navigationBarTitle("Streams")
-            }
+                .onAppear() {
+                    loadData()
+                }
         }
     }
     

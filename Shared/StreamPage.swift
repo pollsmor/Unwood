@@ -4,9 +4,8 @@ import AVKit
 
 struct StreamPage: View {
     let channel: String
-    @State var player = AVPlayer()
-    @State var qualityOptions = [Video]()
-    @State private var videoURL = ""
+    @State private var player = AVPlayer()
+    @State private var qualityOptions = [Video]()
     @State private var showActionSheet = false
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
@@ -18,6 +17,7 @@ struct StreamPage: View {
                 .onDisappear() {
                     player.pause()
                 }
+                .disabled(true)
             WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
         }.navigationBarTitle(channel, displayMode: .inline)
         .navigationBarItems(trailing:
@@ -27,10 +27,11 @@ struct StreamPage: View {
                 Image(systemName: "gear")
                                 }.actionSheet(isPresented: $showActionSheet) {
                                     ActionSheet(title: Text("Quality"), message: Text("Select a quality option."), buttons: qualityOptions.map { qualityOption in
+                                        qualityOption.url != "cancel" ?
                                         .default(Text(qualityOption.quality)) {
                                             self.player = AVPlayer(url: URL(string: qualityOption.url)!)
                                             self.player.play()
-                                        }
+                                        } : .cancel()
                                     })
                                 }
         )
@@ -44,18 +45,22 @@ struct StreamPage: View {
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
                 let json = try! JSON(data: data)
-                print(json)
-                DispatchQueue.main.async {
-                    for qualityOption in json.arrayValue {
-                        qualityOptions.append(
-                            Video(
-                                quality: qualityOption["quality"].string!,
-                                url: qualityOption["url"].string!
-                            )
+                var temp = [Video]() // store the quality options
+                
+                for qualityOption in json.arrayValue {
+                    temp.append(
+                        Video(
+                            quality: qualityOption["quality"].string!,
+                            url: qualityOption["url"].string!
                         )
-                    }
-                    
-                    player = AVPlayer(url: URL(string: json[0]["url"].string!)!) // play source quality
+                    )
+                }
+                
+                temp.append(Video(quality: "", url: "cancel")) // for getting out of action sheet
+                
+                DispatchQueue.main.async {
+                    qualityOptions = temp
+                    player = AVPlayer(url: URL(string: json[0]["url"].string!)!) // play source quality by default
                     player.play()
                 }
             }

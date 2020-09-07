@@ -10,29 +10,26 @@ struct FollowingPage: View {
         if currUser.userData.id == "" {
             ProgressView()
         } else {
-            NavigationView {
-                ScrollView(.vertical) {
-                    VStack(alignment: .leading) {
-                        ForEach(followedChannels) { follow in
-                            HStack {
-                                RemoteImage(type: .url(URL(string: follow.avatar_url)!), errorView: { error in
-                                }, imageView: { image in
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 32.0)
-                                }, loadingView: {
-                                    ProgressView()
-                                        .frame(width: 32.0)
-                                })
-                                Text(follow.display_name)
-                                    .font(.title)
-                            }
+            ScrollView(.vertical) {
+                VStack(alignment: .leading) {
+                    ForEach(followedChannels) { follow in
+                        HStack {
+                            RemoteImage(type: .url(URL(string: follow.avatar_url)!), errorView: { error in
+                            }, imageView: { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 32.0)
+                            }, loadingView: {
+                                ProgressView()
+                                    .frame(width: 32.0)
+                            })
+                            Text(follow.display_name)
+                                .font(.title)
                         }
-                    }.frame(maxWidth: .infinity)
-                     .onAppear(perform: loadData)
-                }.navigationBarTitle("Followed channels")
-            }
+                    }
+                }.frame(maxWidth: .infinity)
+            }.onAppear(perform: loadData)
         }
     }
     
