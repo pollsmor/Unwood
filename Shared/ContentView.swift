@@ -7,24 +7,30 @@ struct ContentView: View {
         if !currUser.isLoggedIn {
             LoginPage()
         } else {
-            NavigationView {
-                TabView {
-                    LivePage().tabItem {
-                        Image(systemName: "tv")
-                        Text("Streams")
-                    }
-                    .navigationBarTitle("")
-                    .navigationBarHidden(true)
-                    FollowingPage().tabItem {
-                            Image(systemName: "heart.fill")
-                            Text("Following")
-                    }.navigationBarTitle("")
-                    .navigationBarHidden(true)
-                    SettingsPage().tabItem {
-                        Image(systemName: "gear")
-                        Text("Settings")
-                    }.navigationBarTitle("")
-                    .navigationBarHidden(true)
+            TabView {
+                NavigationView {
+                    LivePage()
+                        .navigationBarHidden(true)
+                }
+                .tabItem {
+                    Image(systemName: "tv")
+                    Text("Streams")
+                }
+                NavigationView {
+                    FollowingPage()
+                        .navigationBarHidden(true)
+                }
+                .tabItem {
+                        Image(systemName: "heart.fill")
+                        Text("Following")
+                }
+                NavigationView {
+                    SettingsPage()
+                        .navigationBarHidden(true)
+                }
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")
                 }
             }
         }
