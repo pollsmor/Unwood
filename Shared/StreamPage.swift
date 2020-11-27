@@ -4,6 +4,7 @@ import AVKit
 
 struct StreamPage: View {
     let channel: String
+    let channelName: String
     @State private var player = AVPlayer()
     @State private var qualityOptions = [Video]()
     @State private var showActionSheet = false
@@ -21,7 +22,7 @@ struct StreamPage: View {
             colorScheme == .light ?
                 WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?parent=com.pollsmor.unwood") :
                 WebView(url: "https://www.twitch.tv/embed/" + channel + "/chat?darkpopout&parent=com.pollsmor.unwood") // chat
-        }.navigationBarTitle(channel, displayMode: .inline)
+        }.navigationBarTitle(channelName, displayMode: .inline)
         .navigationBarItems(trailing:
                                 Button(action: {
                                     self.showActionSheet.toggle()

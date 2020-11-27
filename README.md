@@ -3,9 +3,9 @@
 
 The name of the app is an inside joke, but so are most of the stuff I name :)
 
-Demo video: https://streamable.com/zhlq3p
+Demo video: https://streamable.com/5l1szc
 
-This is recorded in Xcode 12 beta 5's simulator.
+This is recorded in Xcode 12.2's simulator.
 
 ## Currently supported features
 - Login with Twitch mechanism (asks for login again when access token expires)

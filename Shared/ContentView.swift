@@ -10,7 +10,7 @@ struct ContentView: View {
             TabView {
                 NavigationView {
                     LivePage()
-                        .navigationBarHidden(true)
+                        .navigationBarTitle("Streams")
                 }
                 .tabItem {
                     Image(systemName: "tv")
@@ -18,7 +18,7 @@ struct ContentView: View {
                 }
                 NavigationView {
                     FollowingPage()
-                        .navigationBarHidden(true)
+                        .navigationBarTitle("Followed channels")
                 }
                 .tabItem {
                         Image(systemName: "heart.fill")
@@ -26,7 +26,7 @@ struct ContentView: View {
                 }
                 NavigationView {
                     SettingsPage()
-                        .navigationBarHidden(true)
+                        .navigationBarTitle("Settings")
                 }
                 .tabItem {
                     Image(systemName: "gear")
